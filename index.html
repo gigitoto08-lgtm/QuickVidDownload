@@ -5,20 +5,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="google-site-verification" content="e-bRfN5XspCTjMqs7-ZK-vAKxMtFUVL_6DzlKLTbhuk" />
+<title>QuickVideoDownloader - TikTok Instagram X YouTube Video Downloader</title>
 
-<title>TikTok Downloader | Instagram Reels Downloader | Twitter X & YouTube Shorts - QuickVideoDownloader</title>
-
-<meta name="description" content="Free TikTok Downloader, Instagram Reels Downloader, Twitter X video downloader and YouTube Shorts downloader. Download videos fast and free without watermark.">
+<meta name="description" content="Download TikTok, Instagram Reels, Twitter X videos and YouTube Shorts instantly. Free online video downloader without watermark.">
 
 <meta name="keywords" content="tiktok downloader, instagram reels downloader, twitter video downloader, youtube shorts downloader, download videos online">
 
 <meta name="robots" content="index, follow">
-
-<meta property="og:title" content="QuickVideoDownloader">
-<meta property="og:description" content="Download TikTok, Instagram Reels, Twitter/X and YouTube Shorts videos fast and free.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://gigitoto08-lgtm.github.io/QuickVidDownload/">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -29,15 +22,20 @@ body{
 font-family:Inter;
 margin:0;
 color:white;
-background:linear-gradient(-45deg,#0d071a,#1f1147,#0d071a,#240f52);
-background-size:400% 400%;
-animation:gradient 15s ease infinite;
+
+background:
+radial-gradient(circle at 20% 20%,#ff0033,transparent 40%),
+radial-gradient(circle at 80% 30%,#0066ff,transparent 40%),
+radial-gradient(circle at 50% 80%,#7c4dff,transparent 40%),
+#05050a;
+
+background-size:200% 200%;
+animation:bgMove 12s infinite alternate;
 }
 
-@keyframes gradient{
+@keyframes bgMove{
 0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
+100%{background-position:100% 50%}
 }
 
 .wrapper{
@@ -47,29 +45,32 @@ padding:40px 20px;
 }
 
 .logo{
-font-size:40px;
+font-size:44px;
 font-weight:700;
 text-align:center;
+background:linear-gradient(90deg,#ff0033,#7c4dff,#0099ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
 .tagline{
 text-align:center;
 opacity:.8;
-margin-bottom:25px;
+margin-bottom:30px;
 }
 
 .counter{
 text-align:center;
-opacity:.9;
-margin-bottom:30px;
 font-size:18px;
+margin-bottom:30px;
 }
 
 .card{
-background:#1c1030;
-padding:30px;
+background:rgba(25,20,40,.7);
+backdrop-filter:blur(10px);
+padding:35px;
 border-radius:20px;
-box-shadow:0 0 40px rgba(0,0,0,.4);
+box-shadow:0 0 40px rgba(0,0,0,.7);
 }
 
 .input-area{
@@ -80,17 +81,17 @@ flex-wrap:wrap;
 
 input{
 flex:1;
-padding:14px;
+padding:15px;
 border-radius:40px;
 border:none;
 font-size:16px;
 }
 
 button{
-padding:14px 22px;
+padding:14px 26px;
 border:none;
 border-radius:40px;
-background:#8e5cff;
+background:linear-gradient(45deg,#ff0033,#7c4dff,#0099ff);
 color:white;
 cursor:pointer;
 font-size:16px;
@@ -99,12 +100,15 @@ transition:.3s;
 
 button:hover{
 transform:scale(1.05);
+box-shadow:0 0 20px rgba(255,0,100,.7);
 }
 
 #downloadBtn{
 font-size:18px;
-padding:16px 30px;
-background:#7c4dff;
+padding:18px 36px;
+
+background:linear-gradient(45deg,#ff0033,#7c4dff,#0099ff);
+
 animation:glow 2s infinite alternate;
 }
 
@@ -113,7 +117,7 @@ from{
 box-shadow:0 0 10px #7c4dff;
 }
 to{
-box-shadow:0 0 25px #a77aff,0 0 40px #8e5cff;
+box-shadow:0 0 40px #ff0033,0 0 60px #0099ff;
 }
 }
 
@@ -124,9 +128,9 @@ text-align:center;
 }
 
 .preview img{
-max-width:350px;
+max-width:360px;
 border-radius:15px;
-box-shadow:0 0 20px rgba(0,0,0,.6);
+box-shadow:0 20px 50px rgba(0,0,0,.8);
 }
 
 .download-area{
@@ -137,6 +141,15 @@ text-align:center;
 
 .section{
 margin-top:70px;
+text-align:center;
+}
+
+.platforms{
+display:flex;
+justify-content:center;
+gap:50px;
+font-size:45px;
+margin-top:20px;
 }
 
 .features{
@@ -147,24 +160,15 @@ margin-top:30px;
 }
 
 .feature{
-background:#1c1030;
+background:rgba(30,20,50,.7);
 padding:25px;
 border-radius:15px;
-text-align:center;
+transition:.3s;
 }
 
-.platforms{
-display:flex;
-justify-content:center;
-gap:50px;
-font-size:45px;
-margin-top:25px;
-}
-
-.tutorial{
-display:flex;
-justify-content:center;
-margin-top:30px;
+.feature:hover{
+transform:translateY(-8px);
+box-shadow:0 10px 30px rgba(0,0,0,.6);
 }
 
 footer{
@@ -182,39 +186,45 @@ opacity:.7;
 <div class="wrapper">
 
 <h1 class="logo">QuickVideoDownloader</h1>
-<p class="tagline">Download videos from TikTok, Instagram, Twitter/X and YouTube Shorts instantly</p>
+
+<p class="tagline">
+Download videos from TikTok, Instagram, X and YouTube instantly
+</p>
 
 <div class="counter">
-🔥 Total Downloads: <span id="count">12482</span> videos
+🔥 Total Downloads: <span id="count">12482</span>
 </div>
 
 <div class="card">
 
 <div class="input-area">
 
-<input id="urlInput" placeholder="Paste TikTok / Instagram / X / YouTube link">
+<input id="urlInput" placeholder="Paste video link here">
 
 <button id="pasteBtn"><i class="fa fa-paste"></i> Paste</button>
-<button id="analyzeBtn">Analyze</button>
 
 </div>
 
 <div class="preview" id="preview">
+
 <h3>Video Preview</h3>
 <img id="thumb">
+
 </div>
 
 <div class="download-area" id="downloadArea">
+
 <button id="downloadBtn">
 <i class="fa fa-download"></i> Download Video
 </button>
+
 </div>
 
 </div>
 
 <div class="section">
 
-<h2 style="text-align:center">Supported Platforms</h2>
+<h2>Supported Platforms</h2>
 
 <div class="platforms">
 
@@ -229,15 +239,33 @@ opacity:.7;
 
 <div class="section">
 
-<h2 style="text-align:center">How It Works</h2>
+<h2>Why Use Our Downloader</h2>
 
-<p style="text-align:center;opacity:.8">
-Copy video link → Paste → Analyze → Download
-</p>
+<div class="features">
 
-<div class="tutorial">
+<div class="feature">
+<i class="fa fa-bolt"></i>
+<h3>Ultra Fast</h3>
+<p>Instant video processing.</p>
+</div>
 
-<img src="https://media.giphy.com/media/3o7btPCcdNniyf0ArS/giphy.gif">
+<div class="feature">
+<i class="fa fa-mobile"></i>
+<h3>Mobile Friendly</h3>
+<p>Works perfectly on all devices.</p>
+</div>
+
+<div class="feature">
+<i class="fa fa-video"></i>
+<h3>HD Quality</h3>
+<p>Download high quality videos.</p>
+</div>
+
+<div class="feature">
+<i class="fa fa-infinity"></i>
+<h3>Unlimited</h3>
+<p>Download unlimited videos for free.</p>
+</div>
 
 </div>
 
@@ -253,7 +281,6 @@ Copy video link → Paste → Analyze → Download
 
 const urlInput=document.getElementById("urlInput");
 const pasteBtn=document.getElementById("pasteBtn");
-const analyzeBtn=document.getElementById("analyzeBtn");
 const preview=document.getElementById("preview");
 const thumb=document.getElementById("thumb");
 const downloadArea=document.getElementById("downloadArea");
@@ -263,30 +290,30 @@ const counter=document.getElementById("count");
 let videoURL="";
 
 pasteBtn.onclick=async()=>{
+
 try{
 const text=await navigator.clipboard.readText();
 urlInput.value=text;
+analyzeVideo();
 }catch{
 alert("Clipboard not allowed");
 }
+
 }
 
-analyzeBtn.onclick=async()=>{
+urlInput.addEventListener("change",analyzeVideo);
+
+async function analyzeVideo(){
 
 const url=urlInput.value.trim();
 
-if(!url){
-alert("Paste link first");
-return;
-}
+if(!url) return;
 
 try{
 
 const res = await fetch("https://api.cobalt.tools/api/json",{
 method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
+headers:{ "Content-Type":"application/json"},
 body:JSON.stringify({url:url})
 });
 
@@ -297,16 +324,13 @@ if(data.url){
 videoURL=data.url;
 
 thumb.src=data.thumbnail || "";
+
 preview.style.display="block";
 downloadArea.style.display="block";
 
-}else{
-alert("Video not supported");
 }
 
-}catch{
-alert("Failed to analyze video");
-}
+}catch{}
 
 }
 
@@ -323,11 +347,11 @@ counter.innerText=c+1;
 
 }
 
-let currentDownloads = 12482;
+let downloads=12482;
 
 setInterval(()=>{
-currentDownloads += Math.floor(Math.random()*3);
-counter.innerText = currentDownloads;
+downloads+=Math.floor(Math.random()*4);
+counter.innerText=downloads;
 },4000);
 
 </script>
