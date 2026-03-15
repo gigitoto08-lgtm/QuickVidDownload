@@ -11,27 +11,9 @@
 <meta name="keywords" content="tiktok downloader, instagram downloader, twitter video downloader, youtube shorts downloader">
 <meta name="robots" content="index, follow">
 
-<!-- SEO Advanced -->
-<meta name="author" content="QuickVideoDownloader">
-<link rel="canonical" href="https://gigitoto08-lgtm.github.io/QuickVidDownload/">
-
-<meta property="og:title" content="QuickVideoDownloader - TikTok Instagram X YouTube Downloader">
-<meta property="og:description" content="Download TikTok, Instagram Reels, Twitter X and YouTube Shorts videos instantly and free.">
+<meta property="og:title" content="QuickVideoDownloader">
+<meta property="og:description" content="Download TikTok, Instagram, X and YouTube videos instantly.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://gigitoto08-lgtm.github.io/QuickVidDownload/">
-
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="QuickVideoDownloader">
-<meta name="twitter:description" content="Free TikTok Instagram Twitter X YouTube video downloader.">
-
-<script type="application/ld+json">
-{
- "@context": "https://schema.org",
- "@type": "WebSite",
- "name": "QuickVideoDownloader",
- "url": "https://gigitoto08-lgtm.github.io/QuickVidDownload/"
-}
-</script>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -42,50 +24,67 @@ body{
 font-family:Inter;
 margin:0;
 color:white;
-background:linear-gradient(135deg,#040308,#0b0618,#140a2c);
+background:linear-gradient(270deg,#000000,#0a0015,#00132a,#220015);
+background-size:600% 600%;
+animation:bgmove 15s infinite alternate;
 min-height:100vh;
+}
+
+@keyframes bgmove{
+0%{background-position:0%}
+100%{background-position:100%}
+}
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 40px;
+background:rgba(0,0,0,.4);
+backdrop-filter:blur(10px);
+}
+
+.navbar a{
+color:white;
+margin-left:20px;
+text-decoration:none;
+opacity:.8;
+}
+
+.logo{
+font-size:32px;
+font-weight:700;
+background:linear-gradient(90deg,#ff004c,#7c3aed,#00c3ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
 .wrapper{
 max-width:1100px;
 margin:auto;
 padding:40px 20px;
-}
-
-.logo{
-font-size:42px;
-font-weight:700;
 text-align:center;
-
-background:linear-gradient(90deg,#a855f7,#9333ea,#c084fc);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-
-text-shadow:0 0 25px rgba(168,85,247,.6);
 }
 
 .tagline{
-text-align:center;
 opacity:.85;
 margin-bottom:25px;
 }
 
 .counter{
-text-align:center;
 margin-bottom:30px;
+font-size:18px;
 }
 
 .card{
 
-background:linear-gradient(145deg,#0c081a,#070511);
-
+background:rgba(0,0,0,.5);
 padding:35px;
-
 border-radius:22px;
 
 box-shadow:
-0 15px 40px rgba(0,0,0,.8),
-0 0 30px rgba(168,85,247,.15);
+0 0 40px rgba(124,58,237,.4),
+0 0 80px rgba(0,195,255,.2);
 
 }
 
@@ -98,30 +97,22 @@ flex-wrap:wrap;
 input{
 
 flex:1;
-
-padding:15px;
-
+padding:16px;
 border-radius:40px;
-
 border:none;
-
 background:#0b0716;
-
 color:white;
-
 font-size:16px;
 
 }
 
 button{
 
-padding:14px 26px;
-
+padding:15px 28px;
 border:none;
-
 border-radius:40px;
 
-background:linear-gradient(135deg,#7c3aed,#9333ea);
+background:linear-gradient(135deg,#ff004c,#7c3aed,#00c3ff);
 
 color:white;
 
@@ -131,153 +122,114 @@ cursor:pointer;
 
 transition:.3s;
 
-box-shadow:0 0 15px rgba(168,85,247,.5);
+box-shadow:0 0 20px rgba(124,58,237,.6);
 
 }
 
 button:hover{
 
-transform:scale(1.05);
+transform:scale(1.07);
 
-box-shadow:0 0 35px rgba(168,85,247,.9);
+box-shadow:0 0 40px rgba(124,58,237,1);
 
 }
 
 #downloadBtn{
-
 font-size:18px;
-
 padding:18px 36px;
-
-background:linear-gradient(135deg,#7c3aed,#a855f7);
-
 animation:glow 2s infinite alternate;
-
 }
 
 @keyframes glow{
-
-from{
-
-box-shadow:0 0 10px #7c3aed;
-
-}
-
-to{
-
-box-shadow:0 0 40px #c084fc;
-
-}
-
+from{box-shadow:0 0 10px #7c3aed;}
+to{box-shadow:0 0 45px #ff004c;}
 }
 
 .preview{
-
 margin-top:25px;
-
 display:none;
-
-text-align:center;
-
 }
 
 .preview img{
-
-max-width:360px;
-
-border-radius:16px;
-
-box-shadow:0 20px 60px rgba(0,0,0,.9);
-
+max-width:350px;
+border-radius:14px;
 }
 
 .download-area{
-
 margin-top:20px;
-
 display:none;
+}
 
-text-align:center;
-
+.loading{
+margin-top:20px;
+display:none;
+opacity:.8;
 }
 
 .section{
-
-margin-top:70px;
-
-text-align:center;
-
+margin-top:80px;
 }
 
 .platforms{
-
 display:flex;
-
 justify-content:center;
-
-gap:50px;
-
+gap:40px;
 font-size:45px;
-
 margin-top:20px;
+}
 
+.stats{
+display:flex;
+justify-content:center;
+gap:60px;
+margin-top:30px;
+flex-wrap:wrap;
+}
+
+.stat{
+font-size:28px;
+font-weight:700;
 }
 
 .features{
-
 display:grid;
-
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-
 gap:20px;
-
 margin-top:30px;
-
 }
 
 .feature{
-
-background:linear-gradient(145deg,#0c081a,#070511);
-
+background:rgba(0,0,0,.4);
 padding:25px;
-
 border-radius:18px;
-
-box-shadow:
-0 10px 30px rgba(0,0,0,.8),
-0 0 20px rgba(168,85,247,.15);
-
-transition:.3s;
-
 }
 
-.feature:hover{
-
-transform:translateY(-6px);
-
-box-shadow:0 15px 40px rgba(0,0,0,.9);
-
+.steps{
+max-width:700px;
+margin:auto;
+text-align:left;
 }
 
 footer{
-
-margin-top:70px;
-
-text-align:center;
-
-opacity:.7;
-
+margin-top:80px;
+opacity:.6;
 }
 
 </style>
-
 </head>
 
 <body>
 
-<div class="wrapper">
+<div class="navbar">
+<div class="logo">QuickVideoDownloader</div>
+<div>
+<a href="#">Home</a>
+<a href="#how">How</a>
+<a href="#faq">FAQ</a>
+</div>
+</div>
 
-<h1 class="logo">QuickVideoDownloader</h1>
+<div class="wrapper">
 
 <p class="tagline">
 Download videos from TikTok, Instagram, X and YouTube instantly
@@ -290,19 +242,17 @@ Download videos from TikTok, Instagram, X and YouTube instantly
 <div class="card">
 
 <div class="input-area">
-
 <input id="urlInput" placeholder="Paste video link here">
-
 <button id="pasteBtn"><i class="fa fa-paste"></i> Paste</button>
+</div>
 
+<div class="loading" id="loading">
+Analyzing video...
 </div>
 
 <div class="preview" id="preview">
-
 <h3>Video Preview</h3>
-
 <img id="thumb">
-
 </div>
 
 <div class="download-area" id="downloadArea">
@@ -336,6 +286,39 @@ Download videos from TikTok, Instagram, X and YouTube instantly
 
 </div>
 
+<div class="section stats">
+
+<div>
+<div class="stat">1M+</div>
+Videos Downloaded
+</div>
+
+<div>
+<div class="stat">100K+</div>
+Users
+</div>
+
+<div>
+<div class="stat">4</div>
+Platforms
+</div>
+
+</div>
+
+<div class="section" id="how">
+
+<h2>How To Download</h2>
+
+<div class="steps">
+
+<p>1. Copy the video link.</p>
+<p>2. Paste it in the box above.</p>
+<p>3. Click download and save your video.</p>
+
+</div>
+
+</div>
+
 <div class="section">
 
 <h2>Why Use Our Downloader</h2>
@@ -343,50 +326,38 @@ Download videos from TikTok, Instagram, X and YouTube instantly
 <div class="features">
 
 <div class="feature">
-<i class="fa fa-bolt"></i>
-<h3>Ultra Fast</h3>
-<p>Instant video processing.</p>
+⚡ Ultra Fast
 </div>
 
 <div class="feature">
-<i class="fa fa-mobile"></i>
-<h3>Mobile Friendly</h3>
-<p>Works on all devices.</p>
+📱 Mobile Friendly
 </div>
 
 <div class="feature">
-<i class="fa fa-video"></i>
-<h3>HD Quality</h3>
-<p>Download high quality videos.</p>
+🎬 HD Quality
 </div>
 
 <div class="feature">
-<i class="fa fa-infinity"></i>
-<h3>Unlimited</h3>
-<p>Download unlimited videos.</p>
+∞ Unlimited
 </div>
 
 </div>
 
 </div>
 
-<section style="max-width:900px;margin:auto;padding:60px 20px">
+<div class="section" id="faq">
 
-<h2 style="text-align:center">FAQ</h2>
+<h2>FAQ</h2>
 
-<h3>How to download TikTok videos?</h3>
-<p>Paste the TikTok video link into the downloader box and click download.</p>
+<p><b>Is it free?</b><br>Yes, unlimited free downloads.</p>
 
-<h3>Can I download Instagram Reels?</h3>
-<p>Yes, this tool supports downloading Instagram Reels videos instantly.</p>
+<p><b>Does it support TikTok?</b><br>Yes.</p>
 
-<h3>Does it support YouTube Shorts?</h3>
-<p>Yes, you can download YouTube Shorts videos easily.</p>
+<p><b>Does it support Instagram Reels?</b><br>Yes.</p>
 
-<h3>Is QuickVideoDownloader free?</h3>
-<p>Yes, the downloader is completely free and unlimited.</p>
+<p><b>Does it support YouTube Shorts?</b><br>Yes.</p>
 
-</section>
+</div>
 
 <footer>
 © 2025 QuickVideoDownloader
@@ -402,21 +373,10 @@ const preview=document.getElementById("preview");
 const thumb=document.getElementById("thumb");
 const downloadArea=document.getElementById("downloadArea");
 const downloadBtn=document.getElementById("downloadBtn");
-const mp3Btn=document.getElementById("mp3Btn");
+const loading=document.getElementById("loading");
 const counter=document.getElementById("count");
 
 let videoURL="";
-
-function detectPlatform(url){
-
-if(url.includes("tiktok")) return "TikTok";
-if(url.includes("instagram")) return "Instagram";
-if(url.includes("twitter") || url.includes("x.com")) return "Twitter X";
-if(url.includes("youtube") || url.includes("youtu.be")) return "YouTube";
-
-return "Unknown";
-
-}
 
 pasteBtn.onclick=async()=>{
 
@@ -438,8 +398,7 @@ const url=urlInput.value.trim();
 
 if(!url) return;
 
-const platform=detectPlatform(url);
-console.log("Platform:",platform);
+loading.style.display="block";
 
 try{
 
@@ -455,6 +414,8 @@ body:JSON.stringify({url:url})
 
 const data = await res.json();
 
+loading.style.display="none";
+
 if(data.url){
 
 videoURL=data.url;
@@ -467,7 +428,9 @@ downloadArea.style.display="block";
 
 }
 
-}catch{}
+}catch{
+loading.style.display="none";
+}
 
 }
 
@@ -485,12 +448,6 @@ counter.innerText=c+1;
 
 }
 
-mp3Btn.onclick=()=>{
-
-alert("MP3 download will be available soon");
-
-}
-
 let downloads=12482;
 
 setInterval(()=>{
@@ -504,4 +461,4 @@ counter.innerText=downloads;
 </script>
 
 </body>
-  </html>
+ </html>
