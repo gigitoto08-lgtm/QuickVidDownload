@@ -5,7 +5,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>QuickVideoDownloader</title>
+<title>QuickVideoDownloader - TikTok & Instagram Video Downloader</title>
+
+<meta name="description" content="Download TikTok, Instagram Reels, Twitter and YouTube videos easily and free. QuickVideoDownloader free video downloader.">
+
+<meta name="keywords" content="tiktok downloader, instagram reels downloader, twitter video download, youtube shorts downloader, free video downloader">
+
+<meta name="robots" content="index, follow">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -302,30 +308,21 @@ let videoURL="";
 pasteBtn.onclick=async()=>{
 
 try{
-
 const text=await navigator.clipboard.readText();
 urlInput.value=text;
-
 }catch{
-
 alert("Clipboard not allowed");
-
 }
 
 }
-
-/* auto paste when clicking input */
 
 urlInput.addEventListener("click",async()=>{
 
 try{
-
 const text=await navigator.clipboard.readText();
-
 if(text.includes("http")){
 urlInput.value=text;
 }
-
 }catch{}
 
 });
@@ -373,8 +370,6 @@ counter.innerText=c+1;
 
 }
 
-/* animated downloads counter */
-
 let currentDownloads = 12482;
 
 setInterval(()=>{
@@ -388,4 +383,4 @@ counter.innerText = currentDownloads;
 </script>
 
 </body>
-                        </html>
+</html>
