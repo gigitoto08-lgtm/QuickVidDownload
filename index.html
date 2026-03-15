@@ -9,23 +9,6 @@
 
 <meta name="description" content="Download TikTok, Instagram Reels, Twitter X videos and YouTube Shorts instantly and free.">
 <meta name="keywords" content="tiktok downloader, instagram downloader, twitter video downloader, youtube shorts downloader">
-<meta name="robots" content="index, follow">
-
-<meta property="og:title" content="QuickVideoDownloader">
-<meta property="og:description" content="Download TikTok, Instagram, X and YouTube videos instantly.">
-<meta property="og:type" content="website">
-
-<!-- SEO Schema -->
-<script type="application/ld+json">
-{
- "@context":"https://schema.org",
- "@type":"WebApplication",
- "name":"QuickVideoDownloader",
- "url":"https://gigitoto08-lgtm.github.io/QuickVidDownload/",
- "applicationCategory":"MultimediaApplication",
- "operatingSystem":"All"
-}
-</script>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -53,14 +36,6 @@ justify-content:space-between;
 align-items:center;
 padding:20px 40px;
 background:rgba(0,0,0,.4);
-backdrop-filter:blur(10px);
-}
-
-.navbar a{
-color:white;
-margin-left:20px;
-text-decoration:none;
-opacity:.8;
 }
 
 .logo{
@@ -78,29 +53,15 @@ padding:40px 20px;
 text-align:center;
 }
 
-.tagline{
-opacity:.85;
-margin-bottom:25px;
-}
-
-.counter{
-margin-bottom:30px;
-font-size:18px;
-}
-
 .card{
 background:rgba(0,0,0,.5);
 padding:35px;
 border-radius:22px;
-box-shadow:
-0 0 40px rgba(124,58,237,.4),
-0 0 80px rgba(0,195,255,.2);
 }
 
 .input-area{
 display:flex;
 gap:10px;
-flex-wrap:wrap;
 }
 
 input{
@@ -110,35 +71,15 @@ border-radius:40px;
 border:none;
 background:#0b0716;
 color:white;
-font-size:16px;
 }
 
 button{
-padding:15px 28px;
+padding:14px 24px;
 border:none;
 border-radius:40px;
 background:linear-gradient(135deg,#ff004c,#7c3aed,#00c3ff);
 color:white;
-font-size:16px;
 cursor:pointer;
-transition:.3s;
-box-shadow:0 0 20px rgba(124,58,237,.6);
-}
-
-button:hover{
-transform:scale(1.07);
-box-shadow:0 0 40px rgba(124,58,237,1);
-}
-
-#downloadBtn{
-font-size:18px;
-padding:18px 36px;
-animation:glow 2s infinite alternate;
-}
-
-@keyframes glow{
-from{box-shadow:0 0 10px #7c3aed;}
-to{box-shadow:0 0 45px #ff004c;}
 }
 
 .preview{
@@ -147,37 +88,19 @@ display:none;
 }
 
 .preview img{
-max-width:350px;
-border-radius:14px;
+max-width:300px;
+border-radius:12px;
 }
 
-.video-player{
-margin-top:20px;
-max-width:500px;
-border-radius:14px;
+video{
+max-width:400px;
+margin-top:15px;
+border-radius:12px;
 }
 
 .download-area{
 margin-top:20px;
 display:none;
-}
-
-.loading{
-margin-top:20px;
-display:none;
-opacity:.8;
-}
-
-.section{
-margin-top:80px;
-}
-
-.platforms{
-display:flex;
-justify-content:center;
-gap:40px;
-font-size:45px;
-margin-top:20px;
 }
 
 footer{
@@ -192,30 +115,17 @@ opacity:.6;
 
 <div class="navbar">
 <div class="logo">QuickVideoDownloader</div>
-<div>
-<a href="#">Home</a>
-</div>
 </div>
 
 <div class="wrapper">
 
-<p class="tagline">
-Download videos from TikTok, Instagram, X and YouTube instantly
-</p>
-
-<div class="counter">
-🔥 Total Downloads: <span id="count">12482</span>
-</div>
+<p>Download videos from TikTok, Instagram, X and YouTube instantly</p>
 
 <div class="card">
 
 <div class="input-area">
-<input id="urlInput" placeholder="Paste video link here">
-<button id="pasteBtn"><i class="fa fa-paste"></i> Paste</button>
-</div>
-
-<div class="loading" id="loading">
-Analyzing video...
+<input id="urlInput" placeholder="Paste TikTok video link here">
+<button onclick="analyzeVideo()">Analyze</button>
 </div>
 
 <div class="preview" id="preview">
@@ -224,7 +134,9 @@ Analyzing video...
 
 <img id="thumb">
 
-<video id="player" class="video-player" controls></video>
+<br>
+
+<video id="player" controls></video>
 
 <p id="author"></p>
 <p id="duration"></p>
@@ -233,30 +145,15 @@ Analyzing video...
 
 <div class="download-area" id="downloadArea">
 
-<button id="downloadBtn">
+<button onclick="downloadVideo()">
 <i class="fa fa-download"></i> Download Video
 </button>
 
 <br><br>
 
-<button id="mp3Btn">
+<button onclick="downloadMP3()">
 <i class="fa fa-music"></i> Download MP3
 </button>
-
-</div>
-
-</div>
-
-<div class="section">
-
-<h2>Supported Platforms</h2>
-
-<div class="platforms">
-
-<i class="fab fa-tiktok"></i>
-<i class="fab fa-instagram"></i>
-<i class="fab fa-x-twitter"></i>
-<i class="fab fa-youtube"></i>
 
 </div>
 
@@ -270,111 +167,78 @@ Analyzing video...
 
 <script>
 
-const urlInput=document.getElementById("urlInput");
-const pasteBtn=document.getElementById("pasteBtn");
-const preview=document.getElementById("preview");
-const thumb=document.getElementById("thumb");
-const player=document.getElementById("player");
-const author=document.getElementById("author");
-const duration=document.getElementById("duration");
-const downloadArea=document.getElementById("downloadArea");
-const downloadBtn=document.getElementById("downloadBtn");
-const mp3Btn=document.getElementById("mp3Btn");
-const loading=document.getElementById("loading");
-const counter=document.getElementById("count");
-
-let videoURL="";
-let audioURL="";
-
-pasteBtn.onclick=async()=>{
-
-try{
-const text=await navigator.clipboard.readText();
-urlInput.value=text;
-analyzeVideo();
-}catch{
-alert("Clipboard not allowed");
-}
-
-}
-
-urlInput.addEventListener("change",analyzeVideo);
+let videoURL=""
+let audioURL=""
 
 async function analyzeVideo(){
 
-const url=urlInput.value.trim();
+const url=document.getElementById("urlInput").value.trim()
 
-if(!url) return;
-
-loading.style.display="block";
+if(!url){
+alert("Paste video link")
+return
+}
 
 try{
 
-const api="https://api.tiklydown.eu.org/api/download?url="+encodeURIComponent(url);
+const api="https://www.tikwm.com/api/?url="+encodeURIComponent(url)
 
-const res=await fetch(api);
+const res=await fetch(api)
 
-const data=await res.json();
+const json=await res.json()
 
-loading.style.display="none";
+if(json.data){
 
-if(data && data.video){
+videoURL=json.data.play
+audioURL=json.data.music
 
-videoURL=data.video;
-audioURL=data.music || data.video;
+document.getElementById("thumb").src=json.data.cover
 
-thumb.src=data.cover || "";
-player.src=videoURL;
+document.getElementById("player").src=videoURL
 
-author.innerText="👤 Author: "+(data.author || "Unknown");
-duration.innerText="⏱ Duration: "+(data.duration || "Unknown")+" sec";
+document.getElementById("author").innerText="Author: "+json.data.author.nickname
 
-preview.style.display="block";
-downloadArea.style.display="block";
+document.getElementById("duration").innerText="Duration: "+json.data.duration+" sec"
 
-}
+document.getElementById("preview").style.display="block"
 
-}catch{
+document.getElementById("downloadArea").style.display="block"
 
-loading.style.display="none";
-alert("Failed to analyze video");
+}else{
+
+alert("Video not found")
 
 }
 
+}catch(e){
+
+alert("Failed to analyze video")
+
 }
 
-downloadBtn.onclick=()=>{
+}
+
+function downloadVideo(){
 
 if(videoURL){
 
-window.open(videoURL);
-
-let c=parseInt(counter.innerText);
-
-counter.innerText=c+1;
+window.open(videoURL)
 
 }
 
 }
 
-mp3Btn.onclick=()=>{
+function downloadMP3(){
 
 if(audioURL){
-window.open(audioURL);
-}
+
+window.open(audioURL)
 
 }
 
-let downloads=12482;
-
-setInterval(()=>{
-
-downloads+=Math.floor(Math.random()*4);
-counter.innerText=downloads;
-
-},4000);
+}
 
 </script>
 
 </body>
- </html>
+</html>
