@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<!-- ADSTERAA AD -->
+<!-- ADSTERA AD -->
 <script src="https://pl28922032.effectivegatecpm.com/ae/59/e3/ae59e39c1ca812f83ff3ad133327688b.js"></script>
 
 <style>
@@ -190,13 +190,13 @@ margin-bottom:20px;
 
 <div class="download-area" id="downloadArea">
 
-<button onclick="downloadVideo()">
+<button onclick="downloadVideoAd()">
 <i class="fa fa-download"></i> Download Video
 </button>
 
 <br><br>
 
-<button onclick="downloadMP3()">
+<button onclick="downloadMP3Ad()">
 <i class="fa fa-music"></i> Download MP3
 </button>
 
@@ -213,10 +213,6 @@ margin-bottom:20px;
 <i class="fab fa-x-twitter"></i>
 <i class="fab fa-youtube"></i>
 </div>
-
-<p style="opacity:.8;margin-top:15px">
-Download videos from TikTok, Instagram, X and YouTube instantly.
-</p>
 
 </section>
 
@@ -307,16 +303,32 @@ alert("Failed to analyze video")
 
 }
 
-function downloadVideo(){
+/* تحميل الفيديو مع إعلان */
+
+function downloadVideoAd(){
+
+window.open("https://www.google.com","_blank")
+
+setTimeout(()=>{
 if(videoURL){
 window.open(videoURL)
 }
+},2000)
+
 }
 
-function downloadMP3(){
+/* تحميل MP3 مع إعلان */
+
+function downloadMP3Ad(){
+
+window.open("https://www.google.com","_blank")
+
+setTimeout(()=>{
 if(audioURL){
 window.open(audioURL)
 }
+},2000)
+
 }
 
 let downloads=12482
