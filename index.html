@@ -11,10 +11,16 @@
 
 <meta name="description" content="Free TikTok Downloader, Instagram Reels Downloader, Twitter X video downloader and YouTube Shorts downloader. Download videos fast and free without watermark.">
 
+<meta name="keywords" content="tiktok downloader, instagram reels downloader, twitter video downloader, youtube shorts downloader, download videos online">
+
 <meta name="robots" content="index, follow">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<meta property="og:title" content="QuickVideoDownloader">
+<meta property="og:description" content="Download TikTok, Instagram Reels, Twitter/X and YouTube Shorts videos fast and free.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://gigitoto08-lgtm.github.io/QuickVidDownload/">
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
@@ -41,10 +47,9 @@ padding:40px 20px;
 }
 
 .logo{
-font-size:38px;
+font-size:40px;
 font-weight:700;
 text-align:center;
-margin-bottom:5px;
 }
 
 .tagline{
@@ -55,8 +60,9 @@ margin-bottom:25px;
 
 .counter{
 text-align:center;
-opacity:.8;
+opacity:.9;
 margin-bottom:30px;
+font-size:18px;
 }
 
 .card{
@@ -69,6 +75,7 @@ box-shadow:0 0 40px rgba(0,0,0,.4);
 .input-area{
 display:flex;
 gap:10px;
+flex-wrap:wrap;
 }
 
 input{
@@ -79,11 +86,6 @@ border:none;
 font-size:16px;
 }
 
-input:focus{
-outline:none;
-box-shadow:0 0 10px #8e5cff;
-}
-
 button{
 padding:14px 22px;
 border:none;
@@ -92,17 +94,27 @@ background:#8e5cff;
 color:white;
 cursor:pointer;
 font-size:16px;
-transition:0.3s;
+transition:.3s;
 }
 
 button:hover{
-background:#a77aff;
+transform:scale(1.05);
 }
 
 #downloadBtn{
 font-size:18px;
 padding:16px 30px;
 background:#7c4dff;
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{
+box-shadow:0 0 10px #7c4dff;
+}
+to{
+box-shadow:0 0 25px #a77aff,0 0 40px #8e5cff;
+}
 }
 
 .preview{
@@ -114,6 +126,7 @@ text-align:center;
 .preview img{
 max-width:350px;
 border-radius:15px;
+box-shadow:0 0 20px rgba(0,0,0,.6);
 }
 
 .download-area{
@@ -138,12 +151,6 @@ background:#1c1030;
 padding:25px;
 border-radius:15px;
 text-align:center;
-transition:0.3s;
-}
-
-.feature:hover{
-transform:translateY(-8px);
-box-shadow:0 15px 35px rgba(0,0,0,.5);
 }
 
 .platforms{
@@ -160,27 +167,10 @@ justify-content:center;
 margin-top:30px;
 }
 
-iframe{
-border-radius:15px;
-max-width:100%;
-}
-
 footer{
 margin-top:70px;
 text-align:center;
 opacity:.7;
-}
-
-@media(max-width:600px){
-
-.input-area{
-flex-direction:column;
-}
-
-button{
-width:100%;
-}
-
 }
 
 </style>
@@ -195,7 +185,7 @@ width:100%;
 <p class="tagline">Download videos from TikTok, Instagram, Twitter/X and YouTube Shorts instantly</p>
 
 <div class="counter">
-Total Downloads: <span id="count">12482</span>
+🔥 Total Downloads: <span id="count">12482</span> videos
 </div>
 
 <div class="card">
@@ -205,28 +195,22 @@ Total Downloads: <span id="count">12482</span>
 <input id="urlInput" placeholder="Paste TikTok / Instagram / X / YouTube link">
 
 <button id="pasteBtn"><i class="fa fa-paste"></i> Paste</button>
-
 <button id="analyzeBtn">Analyze</button>
 
 </div>
 
 <div class="preview" id="preview">
-
 <h3>Video Preview</h3>
 <img id="thumb">
-
 </div>
 
 <div class="download-area" id="downloadArea">
-
 <button id="downloadBtn">
 <i class="fa fa-download"></i> Download Video
 </button>
-
 </div>
 
 </div>
-
 
 <div class="section">
 
@@ -243,99 +227,21 @@ Total Downloads: <span id="count">12482</span>
 
 </div>
 
-
 <div class="section">
 
-<h2 style="text-align:center">Why Use QuickVideoDownloader</h2>
-
-<div class="features">
-
-<div class="feature">
-<i class="fa fa-bolt"></i>
-<h3>Fast Download</h3>
-<p>Download videos instantly without waiting.</p>
-</div>
-
-<div class="feature">
-<i class="fa fa-mobile"></i>
-<h3>Works On Mobile</h3>
-<p>Use it on Android, iPhone or desktop.</p>
-</div>
-
-<div class="feature">
-<i class="fa fa-video"></i>
-<h3>HD Quality</h3>
-<p>Download videos in high quality.</p>
-</div>
-
-<div class="feature">
-<i class="fa fa-infinity"></i>
-<h3>Unlimited</h3>
-<p>Download unlimited videos for free.</p>
-</div>
-
-</div>
-
-</div>
-
-
-<div class="section">
-
-<h2 style="text-align:center">How To Download</h2>
-
-<ol style="max-width:600px;margin:auto;line-height:2">
-
-<li>Copy the video link from TikTok, Instagram, Twitter or YouTube</li>
-<li>Paste the link in the box above</li>
-<li>Click Analyze</li>
-<li>Download the video instantly</li>
-
-</ol>
-
-</div>
-
-
-<div class="section">
-
-<h2 style="text-align:center">Video Tutorial</h2>
+<h2 style="text-align:center">How It Works</h2>
 
 <p style="text-align:center;opacity:.8">
-Watch how to use QuickVideoDownloader
+Copy video link → Paste → Analyze → Download
 </p>
 
 <div class="tutorial">
 
-<iframe width="560" height="315"
-src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-title="Video tutorial"
-frameborder="0"
-allowfullscreen>
-</iframe>
+<img src="https://media.giphy.com/media/3o7btPCcdNniyf0ArS/giphy.gif">
 
 </div>
 
 </div>
-
-
-<div class="section">
-
-<h2 style="text-align:center">FAQ</h2>
-
-<div style="max-width:700px;margin:auto">
-
-<h3>Is this downloader free?</h3>
-<p>Yes, it is completely free.</p>
-
-<h3>Do you store videos?</h3>
-<p>No, videos are not stored on our servers.</p>
-
-<h3>Which platforms are supported?</h3>
-<p>TikTok, Instagram Reels, Twitter/X and YouTube Shorts.</p>
-
-</div>
-
-</div>
-
 
 <footer>
 © 2025 QuickVideoDownloader
@@ -357,14 +263,12 @@ const counter=document.getElementById("count");
 let videoURL="";
 
 pasteBtn.onclick=async()=>{
-
 try{
 const text=await navigator.clipboard.readText();
 urlInput.value=text;
 }catch{
 alert("Clipboard not allowed");
 }
-
 }
 
 analyzeBtn.onclick=async()=>{
@@ -378,21 +282,30 @@ return;
 
 try{
 
-const api="https://tikwm.com/api/?url="+encodeURIComponent(url);
+const res = await fetch("https://api.cobalt.tools/api/json",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({url:url})
+});
 
-const res=await fetch(api);
-const data=await res.json();
+const data = await res.json();
 
-videoURL=data.data.play;
-thumb.src=data.data.cover;
+if(data.url){
 
+videoURL=data.url;
+
+thumb.src=data.thumbnail || "";
 preview.style.display="block";
 downloadArea.style.display="block";
 
+}else{
+alert("Video not supported");
+}
+
 }catch{
-
-alert("Failed to fetch video");
-
+alert("Failed to analyze video");
 }
 
 }
@@ -413,14 +326,11 @@ counter.innerText=c+1;
 let currentDownloads = 12482;
 
 setInterval(()=>{
-
 currentDownloads += Math.floor(Math.random()*3);
-
 counter.innerText = currentDownloads;
-
 },4000);
 
 </script>
 
 </body>
-</html>
+  </html>
