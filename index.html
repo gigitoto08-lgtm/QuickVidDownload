@@ -77,15 +77,12 @@ font-size:18px;
 }
 
 .card{
-
 background:rgba(0,0,0,.5);
 padding:35px;
 border-radius:22px;
-
 box-shadow:
 0 0 40px rgba(124,58,237,.4),
 0 0 80px rgba(0,195,255,.2);
-
 }
 
 .input-area{
@@ -95,7 +92,6 @@ flex-wrap:wrap;
 }
 
 input{
-
 flex:1;
 padding:16px;
 border-radius:40px;
@@ -103,35 +99,23 @@ border:none;
 background:#0b0716;
 color:white;
 font-size:16px;
-
 }
 
 button{
-
 padding:15px 28px;
 border:none;
 border-radius:40px;
-
 background:linear-gradient(135deg,#ff004c,#7c3aed,#00c3ff);
-
 color:white;
-
 font-size:16px;
-
 cursor:pointer;
-
 transition:.3s;
-
 box-shadow:0 0 20px rgba(124,58,237,.6);
-
 }
 
 button:hover{
-
 transform:scale(1.07);
-
 box-shadow:0 0 40px rgba(124,58,237,1);
-
 }
 
 #downloadBtn{
@@ -253,6 +237,8 @@ Analyzing video...
 <div class="preview" id="preview">
 <h3>Video Preview</h3>
 <img id="thumb">
+<p id="author"></p>
+<p id="duration"></p>
 </div>
 
 <div class="download-area" id="downloadArea">
@@ -286,79 +272,6 @@ Analyzing video...
 
 </div>
 
-<div class="section stats">
-
-<div>
-<div class="stat">1M+</div>
-Videos Downloaded
-</div>
-
-<div>
-<div class="stat">100K+</div>
-Users
-</div>
-
-<div>
-<div class="stat">4</div>
-Platforms
-</div>
-
-</div>
-
-<div class="section" id="how">
-
-<h2>How To Download</h2>
-
-<div class="steps">
-
-<p>1. Copy the video link.</p>
-<p>2. Paste it in the box above.</p>
-<p>3. Click download and save your video.</p>
-
-</div>
-
-</div>
-
-<div class="section">
-
-<h2>Why Use Our Downloader</h2>
-
-<div class="features">
-
-<div class="feature">
-⚡ Ultra Fast
-</div>
-
-<div class="feature">
-📱 Mobile Friendly
-</div>
-
-<div class="feature">
-🎬 HD Quality
-</div>
-
-<div class="feature">
-∞ Unlimited
-</div>
-
-</div>
-
-</div>
-
-<div class="section" id="faq">
-
-<h2>FAQ</h2>
-
-<p><b>Is it free?</b><br>Yes, unlimited free downloads.</p>
-
-<p><b>Does it support TikTok?</b><br>Yes.</p>
-
-<p><b>Does it support Instagram Reels?</b><br>Yes.</p>
-
-<p><b>Does it support YouTube Shorts?</b><br>Yes.</p>
-
-</div>
-
 <footer>
 © 2025 QuickVideoDownloader
 </footer>
@@ -371,12 +284,16 @@ const urlInput=document.getElementById("urlInput");
 const pasteBtn=document.getElementById("pasteBtn");
 const preview=document.getElementById("preview");
 const thumb=document.getElementById("thumb");
+const author=document.getElementById("author");
+const duration=document.getElementById("duration");
 const downloadArea=document.getElementById("downloadArea");
 const downloadBtn=document.getElementById("downloadBtn");
+const mp3Btn=document.getElementById("mp3Btn");
 const loading=document.getElementById("loading");
 const counter=document.getElementById("count");
 
 let videoURL="";
+let audioURL="";
 
 pasteBtn.onclick=async()=>{
 
@@ -402,34 +319,31 @@ loading.style.display="block";
 
 try{
 
-const res = await fetch("https://api.cobalt.tools/api/json",{
+const api="https://api.tiklydown.eu.org/api/download?url="+encodeURIComponent(url);
 
-method:"POST",
+const res=await fetch(api);
 
-headers:{ "Content-Type":"application/json"},
-
-body:JSON.stringify({url:url})
-
-});
-
-const data = await res.json();
+const data=await res.json();
 
 loading.style.display="none";
 
-if(data.url){
+if(data && data.video){
 
-videoURL=data.url;
+videoURL=data.video;
+audioURL=data.music || data.video;
 
-thumb.src=data.thumbnail || "";
+thumb.src=data.cover || "";
+author.innerText="👤 Author: "+(data.author || "Unknown");
+duration.innerText="⏱ Duration: "+(data.duration || "Unknown")+" sec";
 
 preview.style.display="block";
-
 downloadArea.style.display="block";
 
 }
 
 }catch{
 loading.style.display="none";
+alert("Failed to analyze video");
 }
 
 }
@@ -443,6 +357,16 @@ window.open(videoURL);
 let c=parseInt(counter.innerText);
 
 counter.innerText=c+1;
+
+}
+
+}
+
+mp3Btn.onclick=()=>{
+
+if(audioURL){
+
+window.open(audioURL);
 
 }
 
