@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <!-- SEO optimized meta tags -->
+  <title>QuickVideoDownloader — download from Instagram, TikTok, X & YouTube Shorts</title>
+  <meta name="description" content="Fast, free video downloader for Instagram Reels, TikTok, X (Twitter) videos & YouTube Shorts. Paste URL, get HD options & instant preview.">
+  <meta name="keywords" content="TikTok video downloader, Instagram reels downloader, X video downloader, YouTube shorts downloader, HD video saver">
+  <meta name="author" content="QuickVideoDownloader">
+  <link rel="canonical" href="https://quickvideodownloader.example">
+  <!-- Google Font & Font Awesome for icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* reset & base — modern dark purple 3D atmosphere */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0d071a; /* deep purple blackground */
+      color: #ede4f0;
+      line-height: 1.5;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* 3D floating orbs / depth layers */
+    body::before {
+      content: '';
+      position: fixed;
+      width: 40vmax;
+      height: 40vmax;
+      background: radial-gradient(circle at 30% 30%, rgba(155, 81, 224, 0.25), transparent 70%);
+      top: -10vh;
+      right: -5vw;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: -2;
+      animation: float3d 20s infinite alternate ease-in-out;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      width: 50vmin;
+      height: 50vmin;
+      background: radial-gradient(circle, #3e1a6f 0%, #1b0b2f 80%);
+      bottom: 0;
+      left: 0;
+      filter: blur(70px);
+      opacity: 0.4;
+      z-index: -2;
+      animation: drift 18s infinite alternate;
+    }
+
+    @keyframes float3d {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(-3%, 5%) scale(1.2); }
+    }
+    @keyframes drift {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      100% { transform: translate(8%, -12%) rotate(5deg); }
+    }
+
+    .wrapper {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem;
+      position: relative;
+      z-index: 2;
+      backdrop-filter: blur(2px);
+    }
+
+    /* 3D text effect on logo */
+    .logo {
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(145deg, #c7a4ff, #9d6cf5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 4px 4px 12px rgba(0,0,0,0.6), 0 0 0 rgba(255,255,255,0.2);
+      letter-spacing: -0.5px;
+      transform: perspective(600px) rotateX(2deg);
+      display: inline-block;
+    }
+
+    /* navigation minimal */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+    .nav-links a {
+      color: #d3c0f0;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.2s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+    }
+    .nav-links a:hover {
+      color: #f0e6ff;
+      border-bottom-color: #b184ff;
+      text-shadow: 0 0 8px #c08eff;
+    }
+
+    /* main card — 3D depth with glass + perspective */
+    .downloader-card {
+      background: rgba(30, 16, 45, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(180, 130, 255, 0.2);
+      border-radius: 48px;
+      padding: 2.5rem 2.8rem;
+      box-shadow: 0 30px 50px -15px rgba(0, 0, 0, 0.8),
+                  inset 0 2px 5px rgba(255, 255, 255, 0.08),
+                  0 0 0 2px rgba(150, 80, 255, 0.1);
+      transform: perspective(1200px) rotateX(1deg) rotateY(0.5deg);
+      transition: transform 0.3s ease, box-shadow 0.3s;
+      margin-bottom: 4rem;
+    }
+
+    .downloader-card:hover {
+      transform: perspective(1200px) rotateX(0.5deg) rotateY(1deg) translateZ(10px);
+      box-shadow: 0 40px 70px -10px #231035, 0 0 0 3px rgba(188, 128, 255, 0.3);
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      line-height: 1.2;
+      background: linear-gradient(to right, #f2e9ff, #d6b4ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 10px 20px #1d0d2e;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #cbb6f0;
+      max-width: 600px;
+      margin-bottom: 2rem;
+    }
+
+    /* URL input area */
+    .url-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      align-items: center;
+    }
+    .url-input-wrapper {
+      flex: 4 1 300px;
+      position: relative;
+    }
+    .url-input-wrapper i {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #b790ff;
+      font-size: 1.2rem;
+    }
+    #urlInput {
+      width: 100%;
+      padding: 1.2rem 1.2rem 1.2rem 3.2rem;
+      border: 2px solid #3b2758;
+      background: rgba(10, 5, 20, 0.7);
+      border-radius: 80px;
+      font-size: 1.1rem;
+      color: white;
+      outline: none;
+      transition: 0.3s;
+      font-family: 'Inter', sans-serif;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    }
+    #urlInput:focus {
+      border-color: #b184ff;
+      box-shadow: 0 0 0 4px rgba(177, 132, 255, 0.3), 0 8px 20px black;
+    }
+    #urlInput::placeholder {
+      color: #9a86b3;
+      font-weight: 400;
+    }
+
+    /* platform badge */
+    .platform-badge {
+      margin: 1rem 0 1.8rem 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      background: rgba(44, 24, 66, 0.7);
+      padding: 0.6rem 1.5rem;
+      border-radius: 60px;
+      width: fit-content;
+      border: 1px solid #5f458c;
+      backdrop-filter: blur(5px);
+      font-size: 1.1rem;
+    }
+    .platform-badge i {
+      font-size: 1.5rem;
+      color: #cfb3ff;
+    }
+    .badge-hidden {
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.2s;
+    }
+
+    /* video preview area — 3D inner card */
+    .preview-area {
+      background: rgba(22, 12, 33, 0.7);
+      border-radius: 36px;
+      padding: 1.8rem;
+      margin: 2rem 0 2.2rem;
+      border: 1px solid #4f3970;
+      backdrop-filter: blur(6px);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+      transform: perspective(800px) translateZ(5px);
+      box-shadow: inset 0 -3px 10px rgba(0,0,0,0.6), 0 15px 25px -10px #130825;
+    }
+    .preview-thumb {
+      width: 200px;
+      height: 130px;
+      background: linear-gradient(145deg, #2b1940, #1b0d2b);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #7358b0;
+      box-shadow: 0 15px 25px -8px black;
+    }
+    .preview-thumb i {
+      font-size: 4rem;
+      color: rgba(200, 160, 255, 0.7);
+      filter: drop-shadow(0 0 10px #b184ff);
+    }
+    .preview-meta {
+      flex: 1;
+    }
+    .preview-meta h3 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .preview-meta .video-title {
+      color: #b9a0e6;
+      font-size: 1.1rem;
+      margin-bottom: 0.7rem;
+      word-break: break-word;
+    }
+
+    /* download row with HD dropdown */
+    .download-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.2rem;
+      margin-top: 1.8rem;
+    }
+    .quality-select {
+      background: #231439;
+      border: 2px solid #6f4faa;
+      padding: 1rem 2rem 1rem 1.8rem;
+      border-radius: 50px;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      outline: none;
+    }
+    .download-btn {
+      background: linear-gradient(135deg, #9d6cf5, #6d3fb8);
+      border: none;
+      padding: 1rem 3rem;
+      border-radius: 60px;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      box-shadow: 0 15px 25px -8px #311f4a, 0 0 0 1px #b184ff inset;
+      transition: 0.2s;
+    }
+    .download-btn i {
+      font-size: 1.5rem;
+    }
+    .download-btn:hover {
+      transform: scale(1.04) translateY(-3px);
+      background: linear-gradient(135deg, #b184ff, #7e4ec6);
+      box-shadow: 0 25px 35px -10px #2d164b;
+    }
+
+    /* feature cards with 3D tilt */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+      margin: 5rem 0;
+    }
+    .feature-card {
+      background: rgba(32, 18, 48, 0.6);
+      backdrop-filter: blur(10px);
+      padding: 2.5rem 1.8rem;
+      border-radius: 40px;
+      border: 1px solid #5c4290;
+      transform: perspective(800px) rotateY(0deg) rotateX(0deg);
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 20px 30px -15px black;
+      text-align: center;
+    }
+    .feature-card:hover {
+      transform: perspective(800px) rotateY(3deg) rotateX(1.5deg) translateZ(15px);
+      box-shadow: 0 30px 40px -10px #311f4a, 0 0 0 2px #b28aff;
+    }
+    .feature-card i {
+      font-size: 2.8rem;
+      color: #c6a2ff;
+      margin-bottom: 1.5rem;
+      filter: drop-shadow(0 8px 12px #1d0e31);
+    }
+    .feature-card h3 {
+      font-size: 1.8rem;
+      margin-bottom: 0.8rem;
+    }
+    .feature-card p {
+      color: #c7b2e9;
+    }
+
+    /* blog section — 3D grid, keyword rich */
+    .blog-section {
+      margin: 5rem 0 3rem;
+    }
+    .section-title {
+      font-size: 2.6rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 15px #ab7eff;
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .blog-card {
+      background: rgba(20, 10, 34, 0.75);
+      backdrop-filter: blur(12px);
+      border-radius: 36px;
+      padding: 2rem;
+      border: 1px solid #684f99;
+      transform: perspective(1000px) rotateY(1deg);
+      transition: 0.3s;
+      box-shadow: 0 25px 30px -16px black;
+    }
+    .blog-card:hover {
+      transform: perspective(1000px) rotateY(0deg) translateZ(20px);
+      border-color: #ba9cff;
+    }
+    .blog-card h3 {
+      font-size: 1.9rem;
+      margin-bottom: 1rem;
+      color: #e5d5ff;
+    }
+    .blog-card p {
+      color: #c5afec;
+      margin-bottom: 1.5rem;
+    }
+    .blog-tag {
+      background: #3a2560;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      display: inline-block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #dbc8ff;
+      margin-right: 0.8rem;
+      border: 1px solid #8b69ce;
+    }
+    .read-more {
+      color: #dbbdff;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 1rem;
+      border-bottom: 2px solid transparent;
+    }
+    .read-more:hover {
+      color: white;
+      border-bottom-color: #b184ff;
+    }
+
+    /* footer */
+    footer {
+      margin-top: 5rem;
+      padding: 2rem 0;
+      border-top: 1px solid #3f2c60;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      color: #a48ac0;
+    }
+
+    /* mobile */
+    @media (max-width: 700px) {
+      .wrapper { padding: 1rem 1.2rem; }
+      h1 { font-size: 2.4rem; }
+      .downloader-card { padding: 1.8rem; border-radius: 32px; }
+      .preview-area { flex-direction: column; align-items: flex-start; }
+      .download-row { flex-direction: column; align-items: stretch; }
+      .download-btn { justify-content: center; }
+      .logo { font-size: 1.8rem; }
+      .nav-links { gap: 1rem; }
+    }
+    /* helper hide */
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <nav>
+      <div class="logo">QuickVideoDownloader</div>
+      <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Blog</a>
+        <a href="#">Guide</a>
+        <a href="#">Contact</a>
+      </div>
+    </nav>
+
+    <main>
+      <!-- hero downloader area -->
+      <section class="hero">
+        <h1>Download any video<br>from social networks</h1>
+        <p>Instagram • TikTok • X (Twitter) • YouTube Shorts — in HD</p>
+
+        <div class="downloader-card">
+          <div class="url-group">
+            <div class="url-input-wrapper">
+              <i class="fas fa-link"></i>
+              <input type="url" id="urlInput" placeholder="Paste video URL here (Instagram, TikTok, X, YouTube Shorts...)">
+            </div>
+          </div>
+
+          <!-- platform detection badge -->
+          <div id="platformBadge" class="platform-badge badge-hidden">
+            <i class="fab fa-instagram"></i>
+            <span id="platformName">Instagram</span>
+          </div>
+
+          <!-- preview area (hidden initially) -->
+          <div id="previewArea" class="preview-area hidden">
+            <div class="preview-thumb" id="previewIcon">
+              <i class="fas fa-film"></i>
+            </div>
+            <div class="preview-meta">
+              <h3 id="previewPlatformLabel">Instagram video</h3>
+              <div class="video-title" id="previewTitle">✨ reel from influencer • 0:45</div>
+              <div style="display: flex; gap: 12px; color:#bca6f0;">
+                <span><i class="far fa-eye"></i> 2.4M views</span>
+                <span><i class="far fa-clock"></i> 2 days ago</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- download section with HD options (hidden initially) -->
+          <div id="downloadSection" class="download-row hidden">
+            <select id="qualitySelect" class="quality-select">
+              <option value="HD 720p">HD 720p</option>
+              <option value="Full HD 1080p">Full HD 1080p</option>
+              <option value="2K">2K (if available)</option>
+            </select>
+            <button class="download-btn" id="downloadBtn"><i class="fas fa-download"></i> Download</button>
+          </div>
+
+          <div style="margin-top: 1rem; font-size: 0.95rem; color: #aa99cc;">
+            <i class="fas fa-magic"></i> Automatic platform detection — just paste link
+          </div>
+        </div>
+      </section>
+
+      <!-- 3D features cards -->
+      <section class="features-grid">
+        <div class="feature-card">
+          <i class="fas fa-bolt"></i>
+          <h3>Fast</h3>
+          <p>Instant parsing & direct download links, no waiting.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-highlighter"></i>
+          <h3>HD options</h3>
+          <p>Choose quality: 720p, 1080p, even 2K for selected videos.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-mobile-alt"></i>
+          <h3>Mobile ready</h3>
+          <p>Works perfectly on phones, tablets, and desktops.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-shield-alt"></i>
+          <h3>Private</h3>
+          <p>No registration, no tracking. We respect your privacy.</p>
+        </div>
+      </section>
+
+      <!-- BLOG section for keywords: TikTok downloader, Instagram reels downloader -->
+      <section class="blog-section">
+        <h2 class="section-title">Latest tips & guides</h2>
+        <div class="blog-grid">
+          <article class="blog-card">
+            <span class="blog-tag"><i class="fab fa-tiktok"></i> TikTok</span>
+            <h3>TikTok video downloader: save any video without watermark</h3>
+            <p>Quick steps to download TikTok clips in HD with our tool. Works on all devices.</p>
+            <a href="#" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
+          </article>
+          <article class="blog-card">
+            <span class="blog-tag"><i class="fab fa-instagram"></i> Instagram Reels</span>
+            <h3>Instagram Reels downloader – save reels & stories</h3>
+            <p>Learn how to download Instagram Reels, posts, and IGTV quickly in original quality.</p>
+            <a href="#" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
+          </article>
+          <article class="blog-card">
+            <span class="blog-tag"><i class="fab fa-x-twitter"></i> X (Twitter)</span>
+            <h3>Download X videos & GIFs in one click</h3>
+            <p>New X video downloader feature: paste link and choose HD. Also works with Twitter.</p>
+            <a href="#" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>© 2025 QuickVideoDownloader — 3D dark edition</span>
+      <span><i class="fas fa-envelope"></i> support@quickvd.example</span>
+    </footer>
+  </div>
+
+  <!-- JavaScript for platform detection, preview simulation, and HD download mock -->
+  <script>
+    (function() {
+      const urlInput = document.getElementById('urlInput');
+      const platformBadge = document.getElementById('platformBadge');
+      const platformNameSpan = document.getElementById('platformName');
+      const platformIcon = platformBadge.querySelector('i');
+      const previewArea = document.getElementById('previewArea');
+      const downloadSection = document.getElementById('downloadSection');
+      const previewPlatformLabel = document.getElementById('previewPlatformLabel');
+      const previewTitle = document.getElementById('previewTitle');
+      const previewIconDiv = document.getElementById('previewIcon');
+      const downloadBtn = document.getElementById('downloadBtn');
+      const qualitySelect = document.getElementById('qualitySelect');
+
+      // Helper to update UI based on detected platform
+      function detectPlatform(url) {
+        try {
+          const urlObj = new URL(url);
+          const host = urlObj.hostname.toLowerCase();
+
+          if (host.includes('instagram.com')) return 'instagram';
+          if (host.includes('tiktok.com')) return 'tiktok';
+          if (host.includes('twitter.com') || host.includes('x.com')) return 'x';
+          if (host.includes('youtube.com') && urlObj.pathname.includes('/shorts')) return 'youtube-shorts';
+          if (host.includes('youtu.be')) { // youtu.be/shorts/... maybe not but fallback
+            if (urlObj.pathname.includes('/shorts')) return 'youtube-shorts';
+          }
+          return null;
+        } catch (e) {
+          return null; // invalid URL
+        }
+      }
+
+      // fill mock data based on platform
+      function updateUI(platform) {
+        if (!platform) {
+          platformBadge.classList.add('badge-hidden');
+          previewArea.classList.add('hidden');
+          downloadSection.classList.add('hidden');
+          return;
+        }
+
+        // show badge and set icon / text
+        platformBadge.classList.remove('badge-hidden');
+        downloadSection.classList.remove('hidden');
+        previewArea.classList.remove('hidden');
+
+        // platform specific content
+        let platformDisplay = '';
+        let iconClass = 'fab fa-instagram';
+        let previewLabel = '';
+        let mockTitle = '';
+        let mockViews = '';
+        let previewBgIcon = 'fas fa-film';
+
+        switch (platform) {
+          case 'instagram':
+            platformDisplay = 'Instagram';
+            iconClass = 'fab fa-instagram';
+            previewLabel = 'Instagram Reel';
+            mockTitle = '✨ Sunset vibes • by @traveler';
+            mockViews = '1.2M views';
+            previewBgIcon = 'fab fa-instagram';
+            break;
+          case 'tiktok':
+            platformDisplay = 'TikTok';
+            iconClass = 'fab fa-tiktok';
+            previewLabel = 'TikTok video';
+            mockTitle = '🎵 dance challenge - #trending';
+            mockViews = '3.4M views';
+            previewBgIcon = 'fab fa-tiktok';
+            break;
+          case 'x':
+            platformDisplay = 'X (Twitter)';
+            iconClass = 'fab fa-x-twitter';
+            previewLabel = 'X video';
+            mockTitle = '🔥 official clip • breaking news';
+            mockViews = '892K views';
+            previewBgIcon = 'fab fa-x-twitter';
+            break;
+          case 'youtube-shorts':
+            platformDisplay = 'YouTube Shorts';
+            iconClass = 'fab fa-youtube';
+            previewLabel = 'YouTube Short';
+            mockTitle = '⏱️ quick tip 60sec #shorts';
+            mockViews = '5.1M views';
+            previewBgIcon = 'fab fa-youtube';
+            break;
+          default: break;
+        }
+
+        // update badge
+        platformIcon.className = iconClass;
+        platformNameSpan.innerText = platformDisplay;
+
+        // update preview
+        previewPlatformLabel.innerText = `${platformDisplay} video ready`;
+        previewTitle.innerText = mockTitle + ' • ' + mockViews;
+        // set preview icon background accordingly
+        previewIconDiv.innerHTML = `<i class="${previewBgIcon}" style="font-size:4rem;"></i>`;
+      }
+
+      // input event: detect on paste/typing (we wait a bit after paste)
+      urlInput.addEventListener('input', function(e) {
+        const url = e.target.value.trim();
+        if (url === '') {
+          platformBadge.classList.add('badge-hidden');
+          previewArea.classList.add('hidden');
+          downloadSection.classList.add('hidden');
+          return;
+        }
+        const platform = detectPlatform(url);
+        if (platform) {
+          updateUI(platform);
+        } else {
+          // unrecognized platform: maybe show unsupported, but we keep hidden
+          platformBadge.classList.remove('badge-hidden');
+          platformIcon.className = 'fas fa-question-circle';
+          platformNameSpan.innerText = 'Unknown (unsupported)';
+          previewArea.classList.add('hidden');
+          downloadSection.classList.add('hidden');
+        }
+      });
+
+      // Also detect on paste event explicitly for better responsiveness
+      urlInput.addEventListener('paste', function(e) {
+        setTimeout(() => {
+          const url = urlInput.value.trim();
+          const platform = detectPlatform(url);
+          if (platform) updateUI(platform);
+        }, 30);
+      });
+
+      // Download button mock with HD option
+      downloadBtn.addEventListener('click', function() {
+        const quality = qualitySelect.value;
+        const platform = platformNameSpan.innerText;
+        if (platform && platform !== 'Unknown (unsupported)') {
+          alert(`🚀 Simulated download: ${platform} video started\nQuality: ${quality}\n(real download requires backend)`);
+        } else {
+          alert('⚠️ Please paste a valid video URL first.');
+        }
+      });
+
+      // For demo, prefill with an example to show 3D UI (Instagram example)
+      // Uncomment to show demo content on load, but we want user to paste. We'll set placeholder.
+      // But we want to show off design – let's set example text but not trigger detection automatically? 
+      // We'll just set placeholder attribute. However we can trigger with a test link on window load for demonstration.
+      window.addEventListener('load', function() {
+        // optional demo: put a sample Instagram link to showcase
+        // but we won't simulate click, just let user see empty state.
+        // For better visual, you can prepopulate but we will leave empty to encourage interaction.
+        // However the design preview above looks nice even empty.
+      });
+
+      // extra: on page load, if you want to show preview for demo, uncomment next lines:
+      // setTimeout(() => {
+      //   urlInput.value = 'https://www.instagram.com/reel/Cx12345/';
+      //   updateUI('instagram');
+      // }, 200);
+    })();
+  </script>
+  <!-- ensure hidden class works -->
+  <style>
+    .hidden { display: none !important; }
+  </style>
+</body>
+</html>
