@@ -35,26 +35,10 @@ padding:40px 20px;
 }
 
 .logo{
-font-size:34px;
+font-size:32px;
 font-weight:700;
 text-align:center;
 margin-bottom:10px;
-color:#c9b3ff;
-text-shadow:
-0 0 10px #8e5cff,
-0 0 20px #8e5cff,
-0 0 30px #8e5cff;
-animation:logoGlow 3s infinite alternate;
-}
-
-@keyframes logoGlow{
-from{ text-shadow:0 0 10px #8e5cff }
-to{
-text-shadow:
-0 0 15px #b999ff,
-0 0 30px #b999ff,
-0 0 40px #b999ff
-}
 }
 
 .counter{
@@ -96,18 +80,21 @@ background:#8e5cff;
 color:white;
 cursor:pointer;
 font-size:16px;
-transition:.3s;
+transition:0.3s;
 }
 
 button:hover{
 background:#a77aff;
 }
 
+button:active{
+transform:scale(.95);
+}
+
 #downloadBtn{
 font-size:18px;
 padding:16px 30px;
 background:#7c4dff;
-box-shadow:0 0 15px #7c4dff;
 }
 
 .preview{
@@ -143,18 +130,30 @@ background:#1c1030;
 padding:25px;
 border-radius:15px;
 text-align:center;
-transition:.3s;
+transition:0.3s;
 }
 
 .feature:hover{
 transform:translateY(-8px);
-box-shadow:0 0 20px #8e5cff;
+box-shadow:0 15px 35px rgba(0,0,0,.5);
 }
 
 footer{
 margin-top:60px;
 text-align:center;
 opacity:.7;
+}
+
+@media(max-width:600px){
+
+.input-area{
+flex-direction:column;
+}
+
+button{
+width:100%;
+}
+
 }
 
 </style>
@@ -177,7 +176,7 @@ Total Downloads: <span id="count">12482</span>
 
 <input id="urlInput" placeholder="Paste TikTok / Instagram / X / YouTube link">
 
-<button id="pasteBtn"><i class="fa fa-paste"></i></button>
+<button id="pasteBtn"><i class="fa fa-paste"></i> Paste</button>
 
 <button id="analyzeBtn">Analyze</button>
 
@@ -203,6 +202,40 @@ Total Downloads: <span id="count">12482</span>
 
 <div class="section">
 
+<h2 style="text-align:center">Why Use QuickVideoDownloader</h2>
+
+<div class="features">
+
+<div class="feature">
+<i class="fa fa-bolt"></i>
+<h3>Fast Download</h3>
+<p>Download videos instantly without waiting.</p>
+</div>
+
+<div class="feature">
+<i class="fa fa-mobile"></i>
+<h3>Works On Mobile</h3>
+<p>Use it on Android, iPhone or desktop.</p>
+</div>
+
+<div class="feature">
+<i class="fa fa-video"></i>
+<h3>HD Quality</h3>
+<p>Download videos in high quality.</p>
+</div>
+
+<div class="feature">
+<i class="fa fa-infinity"></i>
+<h3>Unlimited</h3>
+<p>Download unlimited videos for free.</p>
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
 <h2 style="text-align:center">Supported Platforms</h2>
 
 <div style="display:flex;justify-content:center;gap:40px;font-size:40px;margin-top:20px">
@@ -211,6 +244,37 @@ Total Downloads: <span id="count">12482</span>
 <i class="fab fa-instagram"></i>
 <i class="fab fa-x-twitter"></i>
 <i class="fab fa-youtube"></i>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h2 style="text-align:center">How To Download</h2>
+
+<ol style="max-width:600px;margin:auto;line-height:2">
+
+<li>Copy the video link</li>
+<li>Paste it in the box</li>
+<li>Click Analyze</li>
+<li>Download the video</li>
+
+</ol>
+
+</div>
+
+<div class="section">
+
+<h2 style="text-align:center">FAQ</h2>
+
+<div style="max-width:700px;margin:auto">
+
+<h3>Is this downloader free?</h3>
+<p>Yes, it is completely free.</p>
+
+<h3>Do you store videos?</h3>
+<p>No, videos are not stored on our servers.</p>
 
 </div>
 
@@ -238,11 +302,33 @@ let videoURL="";
 pasteBtn.onclick=async()=>{
 
 try{
+
 const text=await navigator.clipboard.readText();
 urlInput.value=text;
-}catch{}
+
+}catch{
+
+alert("Clipboard not allowed");
 
 }
+
+}
+
+/* auto paste when clicking input */
+
+urlInput.addEventListener("click",async()=>{
+
+try{
+
+const text=await navigator.clipboard.readText();
+
+if(text.includes("http")){
+urlInput.value=text;
+}
+
+}catch{}
+
+});
 
 analyzeBtn.onclick=async()=>{
 
@@ -252,8 +338,6 @@ if(!url){
 alert("Paste link first");
 return;
 }
-
-if(url.includes("tiktok")){
 
 try{
 
@@ -269,14 +353,8 @@ preview.style.display="block";
 downloadArea.style.display="block";
 
 }catch{
+
 alert("Failed to fetch video");
-}
-
-}
-
-else{
-
-alert("Currently TikTok downloads supported.");
 
 }
 
@@ -295,16 +373,19 @@ counter.innerText=c+1;
 
 }
 
-let downloads=12482;
+/* animated downloads counter */
+
+let currentDownloads = 12482;
 
 setInterval(()=>{
 
-downloads+=Math.floor(Math.random()*3);
-counter.innerText=downloads;
+currentDownloads += Math.floor(Math.random()*3);
+
+counter.innerText = currentDownloads;
 
 },4000);
 
 </script>
 
 </body>
-  </html>
+                        </html>
