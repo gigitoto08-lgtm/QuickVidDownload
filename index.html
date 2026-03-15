@@ -658,74 +658,180 @@
         // update badge
         platformIcon.className = iconClass;
         platformNameSpan.innerText = platformDisplay;
+<script>
+(function() {
 
-        // update preview
-        previewPlatformLabel.innerText = `${platformDisplay} video ready`;
-        previewTitle.innerText = mockTitle + ' • ' + mockViews;
-        // set preview icon background accordingly
-        previewIconDiv.innerHTML = `<i class="${previewBgIcon}" style="font-size:4rem;"></i>`;
-      }
+const urlInput = document.getElementById('urlInput');
+const platformBadge = document.getElementById('platformBadge');
+const platformNameSpan = document.getElementById('platformName');
+const platformIcon = platformBadge.querySelector('i');
+const previewArea = document.getElementById('previewArea');
+const downloadSection = document.getElementById('downloadSection');
+const previewPlatformLabel = document.getElementById('previewPlatformLabel');
+const previewTitle = document.getElementById('previewTitle');
+const previewIconDiv = document.getElementById('previewIcon');
+const downloadBtn = document.getElementById('downloadBtn');
+const qualitySelect = document.getElementById('qualitySelect');
 
-      // input event: detect on paste/typing (we wait a bit after paste)
-      urlInput.addEventListener('input', function(e) {
-        const url = e.target.value.trim();
-        if (url === '') {
-          platformBadge.classList.add('badge-hidden');
-          previewArea.classList.add('hidden');
-          downloadSection.classList.add('hidden');
-          return;
-        }
-        const platform = detectPlatform(url);
-        if (platform) {
-          updateUI(platform);
-        } else {
-          // unrecognized platform: maybe show unsupported, but we keep hidden
-          platformBadge.classList.remove('badge-hidden');
-          platformIcon.className = 'fas fa-question-circle';
-          platformNameSpan.innerText = 'Unknown (unsupported)';
-          previewArea.classList.add('hidden');
-          downloadSection.classList.add('hidden');
-        }
-      });
 
-      // Also detect on paste event explicitly for better responsiveness
-      urlInput.addEventListener('paste', function(e) {
-        setTimeout(() => {
-          const url = urlInput.value.trim();
-          const platform = detectPlatform(url);
-          if (platform) updateUI(platform);
-        }, 30);
-      });
+function detectPlatform(url) {
 
-      // Download button mock with HD option
-      downloadBtn.addEventListener('click', function() {
-        const quality = qualitySelect.value;
-        const platform = platformNameSpan.innerText;
-        if (platform && platform !== 'Unknown (unsupported)') {
-          alert(`🚀 Simulated download: ${platform} video started\nQuality: ${quality}\n(real download requires backend)`);
-        } else {
-          alert('⚠️ Please paste a valid video URL first.');
-        }
-      });
+try{
 
-      // For demo, prefill with an example to show 3D UI (Instagram example)
-      // Uncomment to show demo content on load, but we want user to paste. We'll set placeholder.
-      // But we want to show off design – let's set example text but not trigger detection automatically? 
-      // We'll just set placeholder attribute. However we can trigger with a test link on window load for demonstration.
-      window.addEventListener('load', function() {
-        // optional demo: put a sample Instagram link to showcase
-        // but we won't simulate click, just let user see empty state.
-        // For better visual, you can prepopulate but we will leave empty to encourage interaction.
-        // However the design preview above looks nice even empty.
-      });
+const urlObj = new URL(url);
+const host = urlObj.hostname.toLowerCase();
 
-      // extra: on page load, if you want to show preview for demo, uncomment next lines:
-      // setTimeout(() => {
-      //   urlInput.value = 'https://www.instagram.com/reel/Cx12345/';
-      //   updateUI('instagram');
-      // }, 200);
-    })();
-  </script>
+if (host.includes('instagram.com')) return 'instagram';
+if (host.includes('tiktok.com')) return 'tiktok';
+if (host.includes('twitter.com') || host.includes('x.com')) return 'x';
+if (host.includes('youtube.com') && urlObj.pathname.includes('/shorts')) return 'youtube-shorts';
+
+return null;
+
+}catch(e){
+
+return null;
+
+}
+
+}
+
+
+function updateUI(platform){
+
+if (!platform){
+
+platformBadge.classList.add('badge-hidden');
+previewArea.classList.add('hidden');
+downloadSection.classList.add('hidden');
+return;
+
+}
+
+platformBadge.classList.remove('badge-hidden');
+previewArea.classList.remove('hidden');
+downloadSection.classList.remove('hidden');
+
+let platformDisplay='';
+let iconClass='fab fa-instagram';
+let previewIcon='fas fa-film';
+
+switch(platform){
+
+case 'instagram':
+platformDisplay='Instagram';
+iconClass='fab fa-instagram';
+previewIcon='fab fa-instagram';
+break;
+
+case 'tiktok':
+platformDisplay='TikTok';
+iconClass='fab fa-tiktok';
+previewIcon='fab fa-tiktok';
+break;
+
+case 'x':
+platformDisplay='X';
+iconClass='fab fa-x-twitter';
+previewIcon='fab fa-x-twitter';
+break;
+
+case 'youtube-shorts':
+platformDisplay='YouTube Shorts';
+iconClass='fab fa-youtube';
+previewIcon='fab fa-youtube';
+break;
+
+}
+
+platformIcon.className=iconClass;
+platformNameSpan.innerText=platformDisplay;
+
+previewPlatformLabel.innerText=platformDisplay+" video ready";
+previewTitle.innerText="Video ready for download";
+
+previewIconDiv.innerHTML=`<i class="${previewIcon}" style="font-size:4rem;"></i>`;
+
+}
+
+
+urlInput.addEventListener('input',function(){
+
+const url=urlInput.value.trim();
+
+if(url===''){
+
+platformBadge.classList.add('badge-hidden');
+previewArea.classList.add('hidden');
+downloadSection.classList.add('hidden');
+return;
+
+}
+
+const platform=detectPlatform(url);
+
+if(platform){
+
+updateUI(platform);
+
+}else{
+
+platformBadge.classList.remove('badge-hidden');
+platformIcon.className='fas fa-question-circle';
+platformNameSpan.innerText='Unknown';
+
+previewArea.classList.add('hidden');
+downloadSection.classList.add('hidden');
+
+}
+
+});
+
+
+downloadBtn.addEventListener('click',async function(){
+
+const url=urlInput.value.trim();
+
+if(!url){
+
+alert("Paste video link first");
+return;
+
+}
+
+downloadBtn.innerHTML="Loading...";
+
+try{
+
+const api="https://tikwm.com/api/?url="+encodeURIComponent(url);
+
+const res=await fetch(api);
+
+const data=await res.json();
+
+if(data.data && data.data.play){
+
+window.open(data.data.play,"_blank");
+
+}else{
+
+alert("Video not found");
+
+}
+
+}catch(err){
+
+alert("Download failed");
+
+}
+
+downloadBtn.innerHTML='<i class="fas fa-download"></i> Download';
+
+});
+
+
+})();
+</script>
   <!-- ensure hidden class works -->
   <style>
     .hidden { display: none !important; }
