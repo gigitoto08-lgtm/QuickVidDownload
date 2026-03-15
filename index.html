@@ -166,7 +166,7 @@ margin-bottom:20px;
 <div class="card">
 
 <div class="input-area">
-<input id="urlInput" placeholder="Paste TikTok video link here">
+<input id="urlInput" placeholder="Paste video link here">
 <button onclick="analyzeVideo()">Analyze</button>
 </div>
 
@@ -201,7 +201,7 @@ margin-bottom:20px;
 
 </div>
 
-<div class="section">
+<section class="section">
 
 <h2>Supported Platforms</h2>
 
@@ -214,37 +214,60 @@ margin-bottom:20px;
 
 </div>
 
-</div>
+<p style="opacity:.8;margin-top:15px">
+Download videos from TikTok, Instagram, X and YouTube instantly.
+</p>
 
-<div class="section">
+</section>
 
-<h2>Why Use QuickVideoDownloader?</h2>
+<section class="section">
+
+<h2>Why Use QuickVideoDownloader</h2>
 
 <div class="features">
 
-<div class="feature">⚡ Fast Video Downloads</div>
-<div class="feature">🎬 HD Quality</div>
-<div class="feature">🎵 Convert to MP3</div>
+<div class="feature">⚡ Ultra Fast Download</div>
+<div class="feature">🎬 HD Video Quality</div>
+<div class="feature">🎵 Convert Video to MP3</div>
 <div class="feature">🔒 Safe & Free</div>
 
 </div>
 
-</div>
+</section>
 
-<div class="section">
+<section class="section">
 
-<h2>How To Download</h2>
+<h2>How To Download Videos</h2>
 
 <div class="steps">
 
-<p>1️⃣ Copy video link from TikTok or Instagram</p>
-<p>2️⃣ Paste the link in the box above</p>
+<p>1️⃣ Copy video link</p>
+<p>2️⃣ Paste link into the box</p>
 <p>3️⃣ Click Analyze</p>
-<p>4️⃣ Download the video instantly</p>
+<p>4️⃣ Download your video</p>
 
 </div>
 
+</section>
+
+<section class="section">
+
+<h2>FAQ</h2>
+
+<div class="steps">
+
+<p><b>Is this downloader free?</b><br>
+Yes, it is 100% free.</p>
+
+<p><b>Which platforms are supported?</b><br>
+TikTok, Instagram, X and YouTube.</p>
+
+<p><b>Do I need to install anything?</b><br>
+No, it works directly in your browser.</p>
+
 </div>
+
+</section>
 
 <footer>
 © 2025 QuickVideoDownloader
@@ -303,19 +326,15 @@ alert("Failed to analyze video")
 }
 
 function downloadVideo(){
-
 if(videoURL){
 window.open(videoURL)
 }
-
 }
 
 function downloadMP3(){
-
 if(audioURL){
 window.open(audioURL)
 }
-
 }
 
 let downloads=12482
@@ -328,4 +347,4 @@ document.getElementById("count").innerText=downloads
 </script>
 
 </body>
-</html>
+  </html>
