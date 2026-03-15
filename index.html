@@ -5,36 +5,43 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>QuickVideoDownloader - Download TikTok, Instagram, X & YouTube Videos</title>
+<title>QuickVideoDownloader</title>
 
-<meta name="description" content="Download videos from TikTok, Instagram, X (Twitter) and YouTube in HD quality for free.">
-<meta name="keywords" content="tiktok downloader, instagram reels downloader, youtube downloader, twitter video download">
-<meta name="robots" content="index, follow">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 
 body{
 font-family:Inter;
-background:#0d071a;
-color:white;
 margin:0;
+color:white;
+background:linear-gradient(-45deg,#0d071a,#1f1147,#0d071a,#240f52);
+background-size:400% 400%;
+animation:gradient 15s ease infinite;
+}
+
+@keyframes gradient{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
 }
 
 .wrapper{
-max-width:1100px;
+max-width:1000px;
 margin:auto;
 padding:40px 20px;
 }
 
 .logo{
-font-size:30px;
+font-size:32px;
 font-weight:700;
+text-align:center;
+margin-bottom:10px;
+}
+
+.counter{
+text-align:center;
+opacity:.8;
 margin-bottom:30px;
 }
 
@@ -42,6 +49,7 @@ margin-bottom:30px;
 background:#1c1030;
 padding:30px;
 border-radius:20px;
+box-shadow:0 0 40px rgba(0,0,0,.4);
 }
 
 .input-area{
@@ -58,7 +66,7 @@ font-size:16px;
 }
 
 button{
-padding:14px 25px;
+padding:14px 22px;
 border:none;
 border-radius:40px;
 background:#8e5cff;
@@ -74,10 +82,10 @@ background:#a77aff;
 .preview{
 margin-top:25px;
 display:none;
+text-align:center;
 }
 
 .preview img{
-width:100%;
 max-width:350px;
 border-radius:15px;
 }
@@ -85,17 +93,17 @@ border-radius:15px;
 .download-area{
 margin-top:20px;
 display:none;
+text-align:center;
 }
 
-select{
-padding:10px;
-border-radius:20px;
-border:none;
-margin-right:10px;
+.section{
+margin-top:60px;
+line-height:1.7;
 }
 
 footer{
-margin-top:40px;
+margin-top:60px;
+text-align:center;
 opacity:.7;
 }
 
@@ -109,13 +117,17 @@ opacity:.7;
 
 <div class="logo">QuickVideoDownloader</div>
 
+<div class="counter">
+Total Downloads: <span id="count">12482</span>
+</div>
+
 <div class="card">
 
 <div class="input-area">
 
 <input id="urlInput" placeholder="Paste TikTok / Instagram / X / YouTube link">
 
-<button id="pasteBtn"><i class="fa fa-paste"></i></button>
+<button id="pasteBtn">Paste</button>
 
 <button id="analyzeBtn">Analyze</button>
 
@@ -123,7 +135,7 @@ opacity:.7;
 
 <div class="preview" id="preview">
 
-<h3>Video preview</h3>
+<h3>Video Preview</h3>
 
 <img id="thumb">
 
@@ -131,21 +143,25 @@ opacity:.7;
 
 <div class="download-area" id="downloadArea">
 
-<select id="quality">
-<option value="720">HD 720p</option>
-<option value="1080">Full HD 1080p</option>
-</select>
-
-<button id="downloadBtn"><i class="fa fa-download"></i> Download</button>
+<button id="downloadBtn">Download Video</button>
 
 </div>
+
+</div>
+
+<div class="section">
+
+<h2>Download Videos From Social Media</h2>
+
+<p>
+Download videos from TikTok, Instagram Reels, X (Twitter), and YouTube Shorts easily.
+Paste the video link above and download instantly.
+</p>
 
 </div>
 
 <footer>
-
 © 2025 QuickVideoDownloader
-
 </footer>
 
 </div>
@@ -159,6 +175,7 @@ const preview=document.getElementById("preview");
 const thumb=document.getElementById("thumb");
 const downloadArea=document.getElementById("downloadArea");
 const downloadBtn=document.getElementById("downloadBtn");
+const counter=document.getElementById("count");
 
 let videoURL="";
 
@@ -178,17 +195,6 @@ alert("Clipboard not allowed");
 
 }
 
-function detectPlatform(url){
-
-if(url.includes("tiktok")) return "tiktok";
-if(url.includes("instagram")) return "instagram";
-if(url.includes("twitter") || url.includes("x.com")) return "twitter";
-if(url.includes("youtube") || url.includes("youtu.be")) return "youtube";
-
-return null;
-
-}
-
 analyzeBtn.onclick=async()=>{
 
 const url=urlInput.value.trim();
@@ -196,24 +202,11 @@ const url=urlInput.value.trim();
 if(!url){
 
 alert("Paste link first");
-
-return;
-
-}
-
-const platform=detectPlatform(url);
-
-if(!platform){
-
-alert("Unsupported link");
-
 return;
 
 }
 
 try{
-
-if(platform==="tiktok"){
 
 const api="https://tikwm.com/api/?url="+encodeURIComponent(url);
 
@@ -224,16 +217,6 @@ const data=await res.json();
 videoURL=data.data.play;
 
 thumb.src=data.data.cover;
-
-}
-
-else{
-
-thumb.src="https://img.youtube.com/vi/"+url.split("v=")[1]+"/0.jpg";
-
-videoURL=url;
-
-}
 
 preview.style.display="block";
 
@@ -252,6 +235,10 @@ downloadBtn.onclick=()=>{
 if(videoURL){
 
 window.open(videoURL);
+
+let c=parseInt(counter.innerText);
+
+counter.innerText=c+1;
 
 }
 
